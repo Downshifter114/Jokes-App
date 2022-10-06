@@ -45,6 +45,7 @@ import java.lang.Exception
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        //ss
         super.onCreate(savedInstanceState)
         setContent {
             Column(
