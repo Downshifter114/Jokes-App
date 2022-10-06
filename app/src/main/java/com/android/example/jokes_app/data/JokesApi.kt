@@ -1,11 +1,15 @@
-package com.android.example.jokes_app
+package com.android.example.jokes_app.data
 
+import com.android.example.jokes_app.model.TwoPartJoke
+import com.android.example.jokes_app.model.SingleJoke
+import com.android.example.jokes_app.utils.Globals.ENDPOINT
 import retrofit2.http.GET
+import retrofit2.http.Url
 
 interface JokesApi {
-    @GET("joke/Any?type=single")
-    suspend fun getSingleJoke() : SingleJoke?
+    @GET
+    suspend fun getSingleJoke(@Url url: String) : SingleJoke?
 
-    @GET("joke/Any?type=twopart")
-    suspend fun getTwoPartJoke() : TwoPartJoke?
+    @GET
+    suspend fun getTwoPartJoke(@Url url: String) : TwoPartJoke?
 }

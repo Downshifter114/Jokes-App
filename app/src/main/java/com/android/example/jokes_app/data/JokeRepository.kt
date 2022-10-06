@@ -1,4 +1,4 @@
-package com.android.example.jokes_app
+package com.android.example.jokes_app.data
 
 import retrofit2.Retrofit
 

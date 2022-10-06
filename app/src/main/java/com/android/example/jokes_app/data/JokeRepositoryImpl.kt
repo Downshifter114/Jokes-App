@@ -1,5 +1,6 @@
-package com.android.example.jokes_app
+package com.android.example.jokes_app.data
 
+import com.android.example.jokes_app.data.JokeRepository
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

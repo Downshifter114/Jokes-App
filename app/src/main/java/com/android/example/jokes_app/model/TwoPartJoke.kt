@@ -1,4 +1,6 @@
-package com.android.example.jokes_app
+package com.android.example.jokes_app.model
+
+import com.android.example.jokes_app.model.Flags
 
 data class TwoPartJoke(
     val category: String,

@@ -1,4 +1,4 @@
-package com.android.example.jokes_app
+package com.android.example.jokes_app.model
 
 data class SingleJoke(
     val category: String,
