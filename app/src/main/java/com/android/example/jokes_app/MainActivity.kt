@@ -1,9 +1,14 @@
 package com.android.example.jokes_app
 
+import android.content.pm.ActivityInfo
+import android.graphics.drawable.shapes.OvalShape
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonColors
 import androidx.compose.material.ButtonDefaults
@@ -11,8 +16,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.android.example.jokes_app.utils.Globals.JOKE_STATE
@@ -36,34 +44,41 @@ import java.lang.Exception
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT
         super.onCreate(savedInstanceState)
         setContent {
+
+
             Column(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(horizontal = 10.dp),
-                verticalArrangement = Arrangement.spacedBy(5.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(5.dp)
             ) {
-                //Categories section
-                CategoriesSection(modifier = Modifier.weight(.15f))
-
                 //Language section
-                LanguageSection(modifier = Modifier.weight(.15f))
-
+                LanguageSection(modifier = Modifier)
+                //Categories section
+                CategoriesSection(modifier = Modifier)
                 //Flags section
-                FlagsSection(modifier = Modifier.weight(.15f))
-
-                //Joke section
-                JokeSection(modifier = Modifier.weight(.4f))
-
-                //Bring joke section
-                BringJokeSection(modifier = Modifier.weight(.15f))
+                FlagsSection(modifier = Modifier)
+                Box(modifier = Modifier
+                    .weight(.5f)
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(10.dp))
+                    .border(2.dp, Color.Black, shape = RoundedCornerShape(10.dp))
+                    .background(Color.LightGray)) {
+                    //Joke section
+                    JokeSection(modifier = Modifier.align(Alignment.Center))
+                }
+                Box(modifier = Modifier.weight(.120f)) {
+                    //Bring joke section
+                    BringJokeSection(modifier = Modifier)
+                }
             }
         }
     }
 }
-
 
 @Composable
 fun CategoriesSection(modifier: Modifier) {
@@ -152,7 +167,8 @@ fun CategoriesSection(modifier: Modifier) {
 @Composable
 fun LanguageSection(modifier: Modifier) {
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceAround
     ) {
         Text(text = "Select Language")
         Row(
@@ -302,7 +318,7 @@ fun FlagsSection(modifier: Modifier) {
 
 @Composable
 fun JokeSection(modifier: Modifier) {
-    Text(text = JOKE_STATE.text)
+    Text(text = JOKE_STATE.text, modifier = modifier.padding(horizontal = 10.dp), fontSize = 15.sp,fontWeight = FontWeight.Bold, textAlign = TextAlign.Justify)
 }
 
 @Composable
@@ -312,14 +328,16 @@ fun BringJokeSection(modifier: Modifier) {
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(5.dp)
     ) {
-        Button(onClick = { BringJoke().invoke(0) }, modifier = Modifier.weight(1f)) {
-            Text(text = "Bring\nSingle-Type\nJoke", textAlign = TextAlign.Center)
+        Button(onClick = { BringJoke().invoke(0) }, modifier = Modifier.weight(1f), colors = ButtonDefaults.buttonColors(backgroundColor = Color.LightGray) ) {
+            Text(text = "Single-Type\nJoke", textAlign = TextAlign.Center)
         }
-        Button(onClick = { BringJoke().invoke(1) }, modifier = Modifier.weight(1f)) {
-            Text(text = "Bring\nTwoPart-Type\nJoke", textAlign = TextAlign.Center)
+        Button(onClick = { BringJoke().invoke(1) }, modifier = Modifier.weight(1f), colors = ButtonDefaults.buttonColors(backgroundColor = Color.LightGray)) {
+            Text(text = "TwoPart-Type\nJoke", textAlign = TextAlign.Center)
         }
     }
 }
+
+
 
 
 
